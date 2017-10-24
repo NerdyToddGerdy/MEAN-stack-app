@@ -10,7 +10,7 @@
   <body  ng-controller="FoodController as ctrl">
 
     <!-- Create New Form -->
-    <div class="new-form">
+    <div ng-show="ctrl.showDetails" class="new-form">
       <h2 ng-click="ctrl.showForm = !ctrl.showForm">Create new item form (click here)</h2>
       <form ng-show="ctrl.showForm" ng-submit="ctrl.createFood()">
         <input type="text" placeholder="name" ng-model="ctrl.newItem.name"/>

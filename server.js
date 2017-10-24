@@ -42,5 +42,5 @@ mongoose.connect('mongodb://localhost:27017/food',{
 });
 
 app.listen(3000, () => {
-  console.log('listening');
+  console.log('listening on localhost:3000');
 });
