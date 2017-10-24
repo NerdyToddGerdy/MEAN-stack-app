@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="FoodApp">
+  <head>
+    <meta charset="utf-8">
+    <title>TEST</title>
+    <style media="screen">
+      ul{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      li{
+        margin: 5px;
+        max-width: 25vw;
+      }
+      li img{
+        width: 100%
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+    <script src="../public/app.js" charset="utf-8"></script>
+  </head>
+  <body  ng-controller="FoodController as ctrl">
+    <ul>
+      <li ng-repeat="food in ctrl.foods | limitTo:-12 | orderBy:'updatedTime':true" class="list-items">
+        <h3>{{food.name}}</h3>
+        <img src="{{food.image}}" alt="">
+      </li>
+    </ul>
+  </body>
+</html>

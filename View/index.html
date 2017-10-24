@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="FoodApp">
+  <head>
+    <meta charset="utf-8">
+    <title>TEST</title>
+    <style media="screen">
+      ul{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      li{
+        list-style: none;
+        margin: 5px;
+        max-width: 25vw;
+      }
+      li img{
+        width: 100%
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </head>
+  <body  ng-controller="FoodController as ctrl">
+
+    <!-- Crete New Form -->
+    <div class="new-form">
+      <h2 ng-click="ctrl.showForm = !ctrl.showForm">Form</h2>
+      <form ng-show="ctrl.showForm" ng-submit="ctrl.createFood()">
+        <input type="text" placeholder="name" ng-model="ctrl.newItem.name"/>
+        <input type="text" placeholder="image" ng-model="ctrl.newItem.image"/>
+        <input type="text" placeholder="link" ng-model="ctrl.newItem.link"/>
+        <input type="text" placeholder="price" ng-model="ctrl.newItem.price"/>
+        <input type="text" placeholder="currency" ng-model="ctrl.newItem.currency"/>
+        <input type="text" placeholder="description" ng-model="ctrl.newItem.description"/>
+        <input type="submit" value="Create new food item"/>
+      </form>
+    </div>
+    <div class="search">
+      <input type="text" ng-model="searchBox">
+    </div>
+    <ul>
+      <li ng-repeat="food in ctrl.foods |filter:searchBox | limitTo:ctrl.limitToNumber |  orderBy:'updatedTime':true " class="list-items">
+        <div ng-show="ctrl.showDetails" class="item-area" ng-click="ctrl.showDetails = !ctrl.showDetails; ctrl.getOneFood(food)">
+          <h3>{{food.name}}</h3>
+          <img src="{{food.image}}" alt="{{food.name}}">
+        </div>
+      </li>
+    </ul>
+    <div ng-show="!ctrl.showDetails" class="item-desc">
+      <h3>{{ctrl.modalData.name}}</h3>
+      <img src="{{ctrl.modalData.image}}" alt="{{ctrl.modalData.name}}"><br>
+      <a href="{{ctrl.modalData.link}}">More info here</a>
+      <h4>{{ctrl.modalData.price}} {{ctrl.modalData.currency}}</h4>
+      <h4>{{ctrl.modalData.description}}</h4>
+      <h4 ng-click="ctrl.showDetails = !ctrl.showDetails">back</h4>
+      <h4 ng-click="ctrl.deleteFood(ctrl.modalData); ctrl.showDetails = !ctrl.showDetails">Delete item</h4>
+      <div class="update-form">
+        <h4 ng-click="ctrl.showUpdateForm = !ctrl.showUpdateForm">update</h4>
+        <form ng-show="ctrl.showUpdateForm" ng-submit="ctrl.updateFood()">
+          <input type="text" placeholder="{{ctrl.modalData.name}}" ng-model="ctrl.updated.name"/>
+          <input type="text" placeholder="{{ctrl.modalData.image}}" ng-model="ctrl.updated.image"/>
+          <input type="text" placeholder="{{ctrl.modalData.link}}" ng-model="ctrl.updated.link"/>
+          <input type="text" placeholder="{{ctrl.modalData.price}}" ng-model="ctrl.updated.price"/>
+          <input type="text" placeholder="{{ctrl.modalData.currency}}" ng-model="ctrl.updated.currency"/>
+          <input type="text" placeholder="{{ctrl.modalData.description}}" ng-model="ctrl.updated.description"/>
+          <input type="submit" value="Update this food item"/>
+        </form>
+      </div>
+    </div>
+
+
+    </div>
+</body>
+</html>
