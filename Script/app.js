@@ -85,6 +85,6 @@ this.deleteFood = (thisItem) => {
     controller.getFoods();
   }, () => {
     console.log('error');
-  })
+  });
 }
 }]);
