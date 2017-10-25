@@ -1,7 +1,7 @@
 console.log('app.js is up and running');
 
 const app = angular.module('FoodApp', []);
-const myURL = 'http://localhost:3000'
+const myURL = 'http://localhost:3000';
 
 app.controller('FoodController', ['$http','$scope', function($http, $scope){
   const controller = this;
@@ -10,7 +10,7 @@ app.controller('FoodController', ['$http','$scope', function($http, $scope){
   this.showDetails = true;
   this.showModal = (food) => {
     this.modalData = food;
-  }
+  };
 
 // GET all the foods
   this.getFoods = function(){
@@ -22,7 +22,7 @@ app.controller('FoodController', ['$http','$scope', function($http, $scope){
         controller.foods = response.data;
         console.log(controller.foods);
       }
-    )
+    );
   }
 this.getFoods();
 
@@ -69,7 +69,7 @@ this.updateFood = () => {
   }).then(response => {
     console.log(response);
     controller.getFoods();
-    controller.getOneFood(this.modalData._id)
+    controller.getOneFood(this.modalData._id);
   }, () => {
     console.log('error');
   });
